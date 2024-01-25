@@ -2,6 +2,8 @@ name: "Pull Request"
 
 on:
   push:
+    branches:
+      - "main"
     paths:
       - ".github/workflows/pull-request.yml"  
   workflow_dispatch:
