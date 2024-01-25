@@ -11,6 +11,7 @@ jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
+    - run: echo ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/checkout@v4
     - name: create pull request
       if: false
