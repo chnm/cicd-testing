@@ -1,5 +1,7 @@
 on:
   push:
+    paths:
+      - ".github/workflows/pull-request.yml"
   workflow_dispatch:
 
 jobs:
