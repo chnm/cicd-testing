@@ -1,0 +1,30 @@
+name: "Pull Request"
+
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - ".github/workflows/pull-request.yml"  
+  workflow_dispatch:
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v4
+    - name: create pull request
+      run: gh pr create -B main -H ${{ github.ref_name }} --title 'Merge ${{ github.ref_name }} into main' --body 'Created by Github action'
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: juliangruber/approve-pull-request-action@v2.0.4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        number: 3
+    - name: Merge Pull Request
+      uses: juliangruber/merge-pull-request-action@v1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        number: 3
+        method: squash # merge rebase
