@@ -15,10 +15,11 @@ jobs:
     - run: echo ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/checkout@v4
     - name: create pull request
+      if: false
       run: gh pr create -B main -H ${{ github.ref_name }} --title 'Merge ${{ github.ref_name }} into main' --body 'Created by Github action'
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - uses: juliangruber/approve-pull-request-action@v2.0.4
       with:
-        github-token: ${{ secrets.GH_TOKEN_QT }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         number: 1
