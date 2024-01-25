@@ -5,4 +5,3 @@ on:
 jobs:
   deploy:
     uses: chnm/.github/.github/workflows/ansible--deploy-ssg-website.yml@restricted-workflow
-    secrets: inherit
