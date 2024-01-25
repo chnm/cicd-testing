@@ -23,4 +23,4 @@ jobs:
           labels: |
             feature
             automated pr
-          branch: ${{ github.ref_name }}
+          branch: main
