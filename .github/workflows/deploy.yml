@@ -12,7 +12,7 @@ jobs:
 
   deploy:
     uses: chnm/.github/.github/workflows/hugo--build-release-deploy.yml@hugo-workflow
-    #secrets: inherit
+    secrets: inherit
     with:
       github-run-id: "${{ github.run_id }}"
       github-workflow: "${{ github.workflow }}"
