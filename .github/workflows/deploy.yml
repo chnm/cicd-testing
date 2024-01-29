@@ -36,8 +36,8 @@ jobs:
       container-registry: "ghcr.io"
       container-image-name: "cicd-testing-website"
       hugo-context-root: "."
-      hugo-devl-url: "devl.rrchnm.site"
-      hugo-prod-url: "test1.rrchnm.org"
+      hugo-devl-url: "https://devl.rrchnm.site"
+      hugo-prod-url: "https://test1.rrchnm.org"
       
       build-artifact-name: "cicd-testing-website"
       release-tag-name-type: "semvar"
