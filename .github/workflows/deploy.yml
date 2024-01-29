@@ -36,7 +36,7 @@ jobs:
       container-image-name: "cicd-testing-website"
       hugo-context-root: "."
       hugo-devl-url: "devl.rrchnm.site"
-      hugo-prod-url: "prod.rrchnm.site"
+      hugo-prod-url: "test1.rrchnm.org"
       
       build-artifact-name: "cicd-testing-website"
       release-tag-name-type: "semvar"
