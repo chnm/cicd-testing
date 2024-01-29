@@ -9,7 +9,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   deploy:
     uses: chnm/.github/.github/workflows/hugo--build-release-deploy.yml@hugo-workflow
     secrets: inherit
@@ -41,4 +40,6 @@ jobs:
       
       build-artifact-name: "cicd-testing-website"
       release-tag-name-type: "semvar"
+      
+      website-fqdn: "test1.rrchnm.org"
       
