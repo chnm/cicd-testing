@@ -23,5 +23,5 @@ jobs:
       release-tag-name-type: "semvar"
       
       website-devl-fqdn: "dev.test1.rrchnm.org"
-      website-prod-fqdn: "dev.test1.rrchnm.org"
+      website-prod-fqdn: "test1.rrchnm.org"
       
