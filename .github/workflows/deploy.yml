@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy:
-    uses: chnm/.github/.github/workflows/hugo--build-release-deploy.yml@main
+    uses: chnm/.github/.github/workflows/hugo--build-release-deploy.yml@v4-artifact-actions
     secrets: inherit
     with:
       container-registry: "ghcr.io"
