@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    image: rrchnm/cicd-testing-django
+    container_name: cicd-testing-django--app
+    environment:
+      - DEBUG={{ template.env.debug_flag }}
+      - DJANGO_SECRET_KEY={{ template.env.secret_key }}
+      - DJANGO_ALLOWED_HOSTS={{ template.env.allowed_hosts }}
+      - DJANGO_CSRF_TRUSTED_ORIGINS={{ template.env.trusted_origins }}
+      - DB_HOST=db
+      - DB_PORT={{ template.env.host_db_port }}
+      - DB_NAME={{ template.env.db_name }}
+      - DB_USER={{ template.env.db_user }}
+      - DB_PASSWORD={{ template.env.db_pass }}
+    ports:
+      - "{{ template.env.host_app_port }}:8000"
+    command: >
+      sh -c "poetry run python manage.py migrate &&
+             poetry run python manage.py collectstatic --no-input &&
+             poetry run python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:12
+    container_name: cicd-testing-django--db
+    environment:
+      - POSTGRES_DB={{ template.env.db_name }}
+      - POSTGRES_USER={{ template.env.db_user }}
+      - POSTGRES_PASSWORD={{ template.env.db_pass }}
+      - POSTGRES_HOST=db
+    volumes:
+      - pg-data:/var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U {{ template.env.db_user }} -d {{ template.env.db_name }}"]
+      interval: 2s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  pg-data:
+    name: "cicd-testing--db-vol"
+    external: true
