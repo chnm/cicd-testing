@@ -2,7 +2,7 @@ services:
   app:
     build: .
     image: rrchnm/cicd-testing-django
-    container_name: cicd-testing-django--app
+    container_name: {{ template.name }}_app
     environment:
       - DEBUG={{ template.env.debug_flag }}
       - DJANGO_SECRET_KEY={{ template.env.secret_key }}
@@ -24,7 +24,7 @@ services:
         condition: service_healthy
   db:
     image: postgres:12
-    container_name: cicd-testing-django--db
+    container_name: {{ template.name }}_db
     environment:
       - POSTGRES_DB={{ template.env.db_name }}
       - POSTGRES_USER={{ template.env.db_user }}
@@ -40,5 +40,5 @@ services:
 
 volumes:
   pg-data:
-    name: "cicd-testing--db-vol"
+    name: "{{ template.name }}--db-vol"
     external: true
