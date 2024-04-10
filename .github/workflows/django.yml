@@ -1,0 +1,21 @@
+name: "django workflow"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+    paths:
+      - ".github/workflows/django.yml"
+      - "django/**"
+
+jobs:
+  workflow:
+    uses: chnm/.github/.github/workflows/django--build-publish-deploy.yml@django-workflow
+    secrets: inherit
+    with:
+      container-registry: "ghcr.io"
+      container-image-name: "cicd-testing"
+
+      website-devl-fqdn: "test1.rrchnm.org"
+      website-prod-fqdn: "test1.rrchnm.org"
