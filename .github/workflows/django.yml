@@ -16,6 +16,8 @@ jobs:
     with:
       container-registry: "ghcr.io"
       container-image-name: "cicd-testing"
+      
+      django-context-root: "django"
 
       website-devl-fqdn: "test1.rrchnm.org"
       website-prod-fqdn: "test1.rrchnm.org"
