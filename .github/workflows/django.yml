@@ -15,7 +15,7 @@ jobs:
     secrets: inherit
     with:
       container-registry: "ghcr.io"
-      container-image-name: "cicd-testing"
+      container-image-name: "cicd-testing-django"
       
       django-context-root: "django"
 
