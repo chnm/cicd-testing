@@ -22,4 +22,6 @@ RUN poetry config virtualenvs.create false
 RUN poetry install --no-interaction --no-ansi
 #RUN poetry install --no-root #--no-dev
 
+FIZZBUZZ
+
 CMD poetry run python manage.py runserver 0.0.0.0:8000
