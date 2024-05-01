@@ -11,7 +11,7 @@ on:
 
 jobs:
   workflow:
-    uses: chnm/.github/.github/workflows/django--build-publish-deploy.yml@django-workflow
+    uses: chnm/.github/.github/workflows/django--build-publish.yml@django-workflow
     secrets: inherit
     with:
       container-registry: "ghcr.io"
