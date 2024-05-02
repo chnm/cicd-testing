@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/{{ template.git.package.image_name }}/{{ template.git.package.tag }}
+    image: ghcr.io/{{ template.git.package.image_name }}:{{ template.git.package.tag }}
     container_name: {{ template.name }}_app
     restart: always
     environment:
