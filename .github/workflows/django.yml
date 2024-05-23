@@ -10,6 +10,7 @@ on:
       - "django/**"
 
 jobs:
+
   workflow:
     uses: chnm/.github/.github/workflows/django--build-publish.yml@django-workflow
     secrets: inherit
