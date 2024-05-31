@@ -25,6 +25,7 @@ jobs:
 
   deploy:
     uses: chnm/.github/.github/workflows/django--deploy.yml@django-workflow
+    needs: [build-publish]
     secrets: inherit
     with:
       website-devl-fqdn: "test1.rrchnm.org"
