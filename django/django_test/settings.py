@@ -25,13 +25,13 @@ env.read_env(str(BASE_DIR / ".env"))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-a0#%+c2cl-n5-#08$7znl4hmqbhfa&igm4!xtryhv_7ms=10ev'
+SECRET_KEY = env("DJANGO_SECRET_KEY", default="notasecretkey")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env("DEBUG")
+DEBUG = env("DEBUG", default="False")
 
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
-CSRF_TRUSTED_ORIGINS = env.list("DJANGO_CSRF_TRUSTED_ORIGINS")
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=['localhost'])
+CSRF_TRUSTED_ORIGINS = env.list("DJANGO_CSRF_TRUSTED_ORIGINS", default=['https://localhost:8000'])
 
 
 # Application definition
@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tailwind',
+    'theme',
 ]
 
 MIDDLEWARE = [
@@ -82,11 +84,11 @@ WSGI_APPLICATION = 'django_test.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.postgresql",
-        "HOST": env("DB_HOST"),
-        "PORT": env("DB_PORT"),
-        "NAME": env("DB_NAME"),
-        "USER": env("DB_USER"),
-        "PASSWORD": env("DB_PASS"),
+        "HOST": env("DB_HOST", default="db"),
+        "PORT": env("DB_PORT", default="5432"),
+        "NAME": env("DB_NAME", default="lasfera"),
+        "USER": env("DB_USER", default="lasfera"),
+        "PASSWORD": env("DB_PASS", default="notapassword"),
     }
 }
 
@@ -132,3 +134,5 @@ STATIC_ROOT = str(BASE_DIR / "staticfiles")
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+TAILWIND_APP_NAME = "theme"

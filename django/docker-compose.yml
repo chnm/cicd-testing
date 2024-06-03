@@ -3,12 +3,20 @@ services:
     build: .
     image: rrchnm/cicd-testing-django
     container_name: cicd-testing-django--app
-    env_file: .env
+    environment:
+      - DEBUG=True
+      - DJANGO_SECRET_KEY=thisisnotasecretkey
+      - DJANGO_ALLOWED_HOSTS=localhost
+      - DJANGO_CSRF_TRUSTED_ORIGINS=http://localhost
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=db_dj
+      - DB_USER=user_dj
+      - DB_PASS=password
     ports:
       - "1337:8000"
     command: >
       sh -c "poetry run python manage.py migrate &&
-             poetry run python manage.py collectstatic --no-input &&
              poetry run python manage.py runserver 0.0.0.0:8000"
    #volumes:
      #- .:/app
@@ -16,11 +24,15 @@ services:
       db:
         condition: service_healthy
   db:
-    image: postgres:12
+    image: postgres:16
     container_name: cicd-testing-django--db
-    env_file: .env
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=db_dj
+      - POSTGRES_USER=user_dj
+      - POSTGRES_PASSWORD=password
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - pg_data:/var/lib/postgresql/data/
    #ports:
      #- "5432:5432"
     healthcheck:
@@ -30,4 +42,4 @@ services:
       retries: 3
 
 volumes:
-  postgres_data:
+  pg_data:
