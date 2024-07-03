@@ -28,5 +28,5 @@ urlpatterns = [
     path('upload/', image_upload, name='upload'),
 ]
 
-if not settings.USE_S3:
+if not settings.OBJ_STORAGE:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

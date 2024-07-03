@@ -13,7 +13,11 @@ services:
       - DB_NAME={{ template.env.db_name }}
       - DB_USER={{ template.env.db_user }}
       - DB_PASS={{ template.env.db_pass }}
-      - USE_S3=True
+      - OBJ_STORAGE={{ template.env.obj_storage }}
+      - OBJ_STORAGE_ACCESS_KEY_ID={{ template.env.obj_storage_access_key_id }}
+      - OBJ_STORAGE_SECRET_ACCESS_KEY={{ template.env.obj_storage_secret_access_key }}
+      - OBJ_STORAGE_BUCKET_NAME={{ template.env.obj_storage_bucket_name }}
+      - OBJ_STORAGE_ENDPOINT_URL={{ template.env.obj_storage_endpoint_url }}
     ports:
       - "{{ template.env.host_app_port }}:8000"
     command: >
