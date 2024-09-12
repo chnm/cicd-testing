@@ -1,3 +1,5 @@
+name: {{ compose_stack_name }}
+
 services:
   app:
     image: ghcr.io/{{ template.git.package.image_name }}:{{ template.git.package.tag }}
@@ -45,5 +47,5 @@ services:
 
 volumes:
   pg-data:
-    name: "{{ template.name }}_db-vol"
+    name: "{{ compose_stack_name }}--db"
     external: true
