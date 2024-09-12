@@ -4,7 +4,6 @@ services:
   app:
     build: .
     image: rrchnm/cicd-testing-django
-    container_name: cicd-testing-django--app
     environment:
       - DEBUG=True
       - DJANGO_SECRET_KEY=thisisnotasecretkey
@@ -32,7 +31,6 @@ services:
         condition: service_healthy
   db:
     image: postgres:16
-    container_name: cicd-testing-django--db
     environment:
       - POSTGRES_HOST=db
       - POSTGRES_DB=db_dj
