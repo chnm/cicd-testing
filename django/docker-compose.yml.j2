@@ -1,6 +1,8 @@
 name: {{ compose_stack_name }}
 
 services:
+
+  {% set service = 'app' %}
   app:
     image: ghcr.io/{{ template.git.package.image_name }}:{{ template.git.package.tag }}
     restart: always
@@ -24,15 +26,19 @@ services:
     command: >
       sh -c "poetry run python manage.py migrate &&
              poetry run python manage.py runserver 0.0.0.0:8000"
+    {% if template.volumes is defined and (template.volumes | selectattr('service', 'eq', service)) is iterable %}
     volumes:
-    {% for vol in (template.volumes | selectattr('service', 'eq', 'app')) %}
+    {% for vol in (template.volumes | selectattr('service', 'eq', 'service) %}
 
       - {{ vol.name }}:{{ vol.container_path }}
     {% endfor %}
+    {% endif %}
 
     depends_on:
       db:
         condition: service_healthy
+
+  {% set service = 'db' %}
   db:
     image: postgres:12
     restart: always
@@ -41,11 +47,13 @@ services:
       - POSTGRES_USER={{ template.env.db_user }}
       - POSTGRES_PASSWORD={{ template.env.db_pass }}
       - POSTGRES_HOST=db
+    {% if template.volumes is defined and (template.volumes | selectattr('service', 'eq', service)) is iterable %}
     volumes:
-    {% for vol in (template.volumes | selectattr('service', 'eq', 'db')) %}
+    {% for vol in (template.volumes | selectattr('service', 'eq', 'service) %}
 
       - {{ vol.name }}:{{ vol.container_path }}
     {% endfor %}
+    {% endif %}
 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U {{ template.env.db_user }} -d {{ template.env.db_name }}"]
