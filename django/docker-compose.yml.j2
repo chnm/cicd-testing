@@ -24,6 +24,10 @@ services:
     command: >
       sh -c "poetry run python manage.py migrate &&
              poetry run python manage.py runserver 0.0.0.0:8000"
+    volumes:
+    {% for vol in (template.volumes | selectattr('service', 'eq', 'app') %}
+      - {{ vol.name }}:{{ vol.container_path }}
+    {% endfor %}
     depends_on:
       db:
         condition: service_healthy
@@ -36,7 +40,9 @@ services:
       - POSTGRES_PASSWORD={{ template.env.db_pass }}
       - POSTGRES_HOST=db
     volumes:
-      - {{ template.volumes | selectattr('container_path', 'eq', '/var/lib/postgresql/data/') | first }}:/var/lib/postgresql/data/
+    {% for vol in (template.volumes | selectattr('service', 'eq', 'db') %}
+      - {{ vol.name }}:{{ vol.container_path }}
+    {% endfor %}
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U {{ template.env.db_user }} -d {{ template.env.db_name }}"]
       interval: 2s
@@ -47,6 +53,6 @@ volumes:
 {% for vol in template.volumes %}
 
   {{ vol.name }}:
-    name: "{{ compose_stack_name }}--{{ vol.id }}"
+    name: "{{ compose_stack_name }}--{{ vol.name }}"
     external: true
 {% endfor %}
