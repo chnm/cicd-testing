@@ -40,7 +40,7 @@ services:
       - POSTGRES_PASSWORD={{ template.env.db_pass }}
       - POSTGRES_HOST=db
     volumes:
-    {% for vol in (template.volumes | selectattr('service', 'eq', 'db') %}
+    {% for vol in (template.volumes | selectattr('service', 'eq', 'db')) %}
       - {{ vol.name }}:{{ vol.container_path }}
     {% endfor %}
     healthcheck:
