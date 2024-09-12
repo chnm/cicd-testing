@@ -29,6 +29,7 @@ services:
 
       - {{ vol.name }}:{{ vol.container_path }}
     {% endfor %}
+
     depends_on:
       db:
         condition: service_healthy
@@ -42,8 +43,10 @@ services:
       - POSTGRES_HOST=db
     volumes:
     {% for vol in (template.volumes | selectattr('service', 'eq', 'db')) %}
+
       - {{ vol.name }}:{{ vol.container_path }}
     {% endfor %}
+
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U {{ template.env.db_user }} -d {{ template.env.db_name }}"]
       interval: 2s
