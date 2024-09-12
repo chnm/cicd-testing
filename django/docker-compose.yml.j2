@@ -28,13 +28,15 @@ services:
     command: >
       sh -c "poetry run python manage.py migrate &&
              poetry run python manage.py runserver 0.0.0.0:8000"
-    {% if template.volumes is defined and ((template.volumes | selectattr('service', 'eq', service)) is iterable) %}
-
+    {% if template.volumes is defined %}
+    {% set vols = (template.volumes | selectattr('service', 'eq', service) %}
+    {% if vols is iterable and vols | length > 0 %}
     volumes:
-    {% for vol in (template.volumes | selectattr('service', 'eq', service)) %}
+    {% for vol in vols %}
 
       - {{ vol.name }}:{{ vol.container_path }}
     {% endfor %}
+    {% endif %}
     {% endif %}
 
     depends_on:
@@ -51,13 +53,15 @@ services:
       - POSTGRES_USER={{ template.env.db_user }}
       - POSTGRES_PASSWORD={{ template.env.db_pass }}
       - POSTGRES_HOST=db
-    {% if template.volumes is defined and ((template.volumes | selectattr('service', 'eq', service)) is iterable) %}
-
+    {% if template.volumes is defined %}
+    {% set vols = (template.volumes | selectattr('service', 'eq', service) %}
+    {% if vols is iterable and vols | length > 0 %}
     volumes:
-    {% for vol in (template.volumes | selectattr('service', 'eq', service)) %}
+    {% for vol in vols %}
 
       - {{ vol.name }}:{{ vol.container_path }}
     {% endfor %}
+    {% endif %}
     {% endif %}
 
     healthcheck:
