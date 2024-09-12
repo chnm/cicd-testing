@@ -28,7 +28,7 @@ services:
              poetry run python manage.py runserver 0.0.0.0:8000"
     {% if template.volumes is defined and (template.volumes | selectattr('service', 'eq', service)) is iterable %}
     volumes:
-    {% for vol in (template.volumes | selectattr('service', 'eq', 'service) %}
+    {% for vol in (template.volumes | selectattr('service', 'eq', service) %}
 
       - {{ vol.name }}:{{ vol.container_path }}
     {% endfor %}
@@ -49,7 +49,7 @@ services:
       - POSTGRES_HOST=db
     {% if template.volumes is defined and (template.volumes | selectattr('service', 'eq', service)) is iterable %}
     volumes:
-    {% for vol in (template.volumes | selectattr('service', 'eq', 'service) %}
+    {% for vol in (template.volumes | selectattr('service', 'eq', service) %}
 
       - {{ vol.name }}:{{ vol.container_path }}
     {% endfor %}
