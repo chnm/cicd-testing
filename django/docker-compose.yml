@@ -1,3 +1,5 @@
+name: cicd_rrchnm_org
+
 services:
   app:
     build: .
