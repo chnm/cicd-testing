@@ -25,7 +25,7 @@ services:
       sh -c "poetry run python manage.py migrate &&
              poetry run python manage.py runserver 0.0.0.0:8000"
     volumes:
-    {% for vol in (template.volumes | selectattr('service', 'eq', 'app') %}
+    {% for vol in (template.volumes | selectattr('service', 'eq', 'app')) %}
       - {{ vol.name }}:{{ vol.container_path }}
     {% endfor %}
     depends_on:
