@@ -1,4 +1,4 @@
-name: "Deploy"
+name: "Hugo build, release, deploy"
 
 on:
   workflow_dispatch:
