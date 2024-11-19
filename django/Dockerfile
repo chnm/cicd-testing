@@ -1,3 +1,4 @@
+
 FROM rust as volta-build
 WORKDIR /src
 RUN git clone https://github.com/volta-cli/volta.git /src
