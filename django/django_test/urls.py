@@ -17,15 +17,22 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from . import views
 from upload.views import image_upload
 from sample.views import root
 
+from wagtail.admin import urls as wagtailadmin_urls
+from wagtail import urls as wagtail_urls
+from wagtail.documents import urls as wagtaildocs_urls
+
 urlpatterns = [
     path('', views.index, name='index'),
     path('admin/', admin.site.urls),
+    path('wagtail-admin/', include(wagtailadmin_urls)),
+    path('wagtail/', include(wagtail_urls)),
+    path('documents/', include(wagtaildocs_urls)),
     path('sample/', root, name='sample'),
     path('upload/', image_upload, name='upload'),
 ]

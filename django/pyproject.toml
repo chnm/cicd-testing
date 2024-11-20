@@ -16,6 +16,7 @@ boto3 = "^1.34.137"
 django-storages = "^1.14.3"
 daphne = "^4.1.2"
 whitenoise = "^6.8.2"
+wagtail = "^6.3.1"
 
 
 [build-system]
