@@ -21,11 +21,12 @@ services:
       - OBJ_STORAGE_ENDPOINT_URL=https://dev.obj.rrchnm.org
     ports:
       - "1337:8000"
+#   command: sh -c "sleep 99999"
     command: >
       sh -c "poetry run python manage.py migrate &&
              poetry run python manage.py runserver 0.0.0.0:8000"
-   #volumes:
-   #  - .:/app
+    volumes:
+      - .:/app
     depends_on:
       db:
         condition: service_healthy
