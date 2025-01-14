@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   build-publish:
-    uses: chnm/.github/.github/workflows/django--build-publish.yml@fix-github-context
+    uses: chnm/.github/.github/workflows/django--build-publish.yml@main
     secrets: inherit
     with:
       container-registry: "ghcr.io"
@@ -27,7 +27,7 @@ jobs:
       website-prod-fqdn: "test1.rrchnm.org"
 
   deploy:
-    uses: chnm/.github/.github/workflows/django--deploy.yml@fix-github-context
+    uses: chnm/.github/.github/workflows/django--deploy.yml@main
     needs: [build-publish]
     secrets: inherit
     with:
