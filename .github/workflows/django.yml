@@ -14,6 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+
   build-publish:
     uses: chnm/.github/.github/workflows/django--build-publish.yml@main
     secrets: inherit
