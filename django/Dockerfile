@@ -27,7 +27,7 @@ ENV PATH="$PATH:/root/.local/bin"
 
 # Install dependencies with Poetry
 RUN poetry config virtualenvs.create false
-RUN poetry install --no-interaction --no-ansi
+RUN poetry install --no-interaction --no-ansi --no-root
 #RUN poetry install --no-root #--no-dev
 
 # Copy over Volta binaries
