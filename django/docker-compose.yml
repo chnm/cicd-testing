@@ -14,7 +14,7 @@ services:
       - DB_NAME=db_dj
       - DB_USER=user_dj
       - DB_PASS=password
-      - OBJ_STORAGE=True
+      - OBJ_STORAGE=False
       - OBJ_STORAGE_ACCESS_KEY_ID=TYD5LA84DHFQTMXT72ZD
       - OBJ_STORAGE_SECRET_ACCESS_KEY=wpqxloq0k7Pl5ELF3AhqS+pB+orrd528XB+aO0uo
       - OBJ_STORAGE_BUCKET_NAME=test1.rrchnm.org
@@ -25,8 +25,8 @@ services:
     command: >
       sh -c "poetry run python manage.py migrate &&
              poetry run python manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - .:/app
+#   volumes:
+#     - .:/app
     depends_on:
       db:
         condition: service_healthy
