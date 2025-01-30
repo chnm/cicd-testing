@@ -2,22 +2,37 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-    <title>CI/CD Django Testing</title>
+		<title>CI/CD Django Testing</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		{% tailwind_css %}
+		<!-- Matomo -->
+		<script>
+			var _paq = window._paq = window._paq || [];
+			/* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+			_paq.push(['trackPageView']);
+			_paq.push(['enableLinkTracking']);
+			(function() {
+				var u="//dev.stats.rrchnm.org/";
+				_paq.push(['setTrackerUrl', u+'matomo.php']);
+				_paq.push(['setSiteId', '118']);
+				var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+				g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+			})();
+		</script>
+		<!-- End Matomo Code -->
 	</head>
 
 	<body class="bg-gray-50 font-serif leading-normal tracking-normal">
 		<div class="container mx-auto">
-		  <h1 class="text-5xl">Django + Tailwind = ❤️</h1>
-		  <pre>Hello world!</pre>
-	          <pre>fizzbuzz</pre>
+			<h1 class="text-5xl">Django + Tailwind = ❤️</h1>
+			<pre>Hello world!</pre>
+			<pre>fizzbuzz</pre>
 		</div>
-                <ul>
-                    <li><a href="/sample">Tailwind Example</a></li>
-                    <li><a href="/upload">Upload</a></li>
-                </ul>
+		<ul>
+			<li><a href="/sample">Tailwind Example</a></li>
+			<li><a href="/upload">Upload</a></li>
+		</ul>
 	</body>
 </html>
