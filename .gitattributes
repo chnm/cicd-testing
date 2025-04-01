@@ -1,1 +1,2 @@
 file2.iso filter=lfs diff=lfs merge=lfs -text
+file3.iso filter=lfs diff=lfs merge=lfs -text
