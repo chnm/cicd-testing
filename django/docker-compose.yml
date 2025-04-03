@@ -1,49 +1,55 @@
-name: cicd_rrchnm_org
+---
+name: rrchnm-cicd-django-test
 
 services:
   app:
     build: .
     image: rrchnm/cicd-testing-django
+    ports:
+      - 8000:8000
+    volumes:
+      - dj-data:/app
+     #- .:/app
     environment:
-      - DEBUG=False
+      - DEBUG=True
       - DJANGO_SECRET_KEY=thisisnotasecretkey
       - DJANGO_ALLOWED_HOSTS=localhost
       - DJANGO_CSRF_TRUSTED_ORIGINS=http://localhost
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_NAME=db_dj
-      - DB_USER=user_dj
-      - DB_PASS=password
-      - OBJ_STORAGE=False
+      - DB_NAME=rrchnm-cicd-django-test
+      - DB_USER=rrchnm-cicd-django-test
+      - DB_PASSWORD=password
+      - ALLAUTH_GITHUB_CLIENT_ID=PLACEHOLDER
+      - ALLAUTH_GITHUB_CLIENT_SECRET=PLACEHOLDER
+      - ALLAUTH_SLACK_CLIENT_ID=PLACEHOLDER
+      - ALLAUTH_SLACK_CLIENT_SECRET=PLACEHOLDER
+      - OBJ_STORAGE=True
       - OBJ_STORAGE_ACCESS_KEY_ID=TYD5LA84DHFQTMXT72ZD
       - OBJ_STORAGE_SECRET_ACCESS_KEY=wpqxloq0k7Pl5ELF3AhqS+pB+orrd528XB+aO0uo
       - OBJ_STORAGE_BUCKET_NAME=test1.rrchnm.org
       - OBJ_STORAGE_ENDPOINT_URL=https://dev.obj.rrchnm.org
-    ports:
-      - "1337:8000"
-#   command: sh -c "sleep 99999"
     command: >
-      sh -c "poetry run python manage.py migrate &&
-             poetry run python manage.py runserver 0.0.0.0:8000"
-#   volumes:
-#     - .:/app
+        sh -c "poetry run python3 manage.py migrate &&
+               poetry run python3 manage.py runserver 0.0.0.0:8000"
     depends_on:
       db:
         condition: service_healthy
   db:
-    image: postgres:16
-    environment:
-      - POSTGRES_HOST=db
-      - POSTGRES_DB=db_dj
-      - POSTGRES_USER=user_dj
-      - POSTGRES_PASSWORD=password
+    image: postgres:17
     volumes:
-      - pg_data:/var/lib/postgresql/data/
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=rrchnm-cicd-django-test
+      - POSTGRES_USER=rrchnm-cicd-django-test
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_HOST=db
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user_dj -d db_dj"]
+      test: ["CMD-SHELL", "pg_isready -U rrchnm-cicd-django-test"]
       interval: 2s
       timeout: 5s
       retries: 3
 
 volumes:
-  pg_data:
+  dj-data:
+  pg-data:
