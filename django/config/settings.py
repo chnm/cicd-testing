@@ -178,8 +178,15 @@ SOCIALACCOUNT_PROVIDERS = {
         'APP': {
             "client_id": env("ALLAUTH_SLACK_CLIENT_ID", default="PLACEHOLDER"),
             "secret": env("ALLAUTH_SLACK_CLIENT_SECRET", default="PLACEHOLDER"),
+            "key": "",
+            "settings": {
+                "scope": [
+                    "openid",
+                    "profile",
+                    "email"
+                ]
+            }
         },
-        'SCOPE': ['openid', 'profile', 'email']
     }
 }
 
