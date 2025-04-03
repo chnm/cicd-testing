@@ -164,7 +164,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 
-#ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
+ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 # allauth: provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
     'github': {
