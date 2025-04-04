@@ -173,7 +173,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'BASE_DOMAIN':'orcid.org',  # for the sandbox API
         #'BASE_DOMAIN':'sandbox.orcid.org',  # for the sandbox API
         # Member API or Public API? Default: False (for the public API)
-        'MEMBER_API': False,  # for the member API
+        'MEMBER_API': True,  # for the member API
     },
     'github': {
         "VERIFIED_EMAIL": True,
