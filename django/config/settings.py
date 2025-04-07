@@ -170,10 +170,14 @@ ACCOUNT_DEFAULT_HTTP_PROTOCOL='https'
 SOCIALACCOUNT_PROVIDERS = {
     'orcid': {
         # Base domain of the API. Default value: 'orcid.org', for the production API
-        'BASE_DOMAIN':'orcid.org',  # for the sandbox API
-        #'BASE_DOMAIN':'sandbox.orcid.org',  # for the sandbox API
+        'BASE_DOMAIN':'sandbox.orcid.org',  # for the sandbox API
+        #'BASE_DOMAIN':'orcid.org',  # for the production API
         # Member API or Public API? Default: False (for the public API)
-        'MEMBER_API': True,  # for the member API
+        'MEMBER_API': False,  # for the member API
+        "APP": {
+            "client_id": env("ALLAUTH_ORCID_CLIENT_ID", default="PLACEHOLDER"),
+            "secret": env("ALLAUTH_ORCID_CLIENT_SECRET", default="PLACEHOLDER"),
+        },
     },
     'github': {
         "VERIFIED_EMAIL": True,
