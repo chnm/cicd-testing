@@ -5,3 +5,7 @@ updates:
     directory: "/django"
     schedule:
       interval: "weekly"
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
