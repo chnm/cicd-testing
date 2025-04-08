@@ -28,7 +28,7 @@ django-storages = "^1.14.4"
 boto3 = "^1.35.94"
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.10.0"
+black = "^25.1.0"
 djhtml = "^3.0.7"
 pre-commit = "^4.0.1"
 django-debug-toolbar = "^4.4.6"
