@@ -3,15 +3,17 @@ version: 2
 updates:
   - package-ecosystem: "pip"
     versioning-strategy: "increase"
-    target-branch: "main"
     directories:
       - "/django"
+    groups:
+      all-django-dependencies:
+        patterns:
+          - "*"
     schedule:
       interval: "daily"
       day: "sunday"
       time: "11:00"
       timezone: "America/New_York"
-    groups:
-      all-django-dependencies:
-        patterns:
-          - "*"
+    target-branch: "main"
+    reviewers:
+      - "chnm/systems"
