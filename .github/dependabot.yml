@@ -2,10 +2,16 @@
 version: 2
 updates:
   - package-ecosystem: "pip"
-    directory: "/django"
+    versioning-strategy: "increase"
+    target-branch: "main"
+    directories:
+      - "/django"
     schedule:
       interval: "weekly"
+      day: "sunday"
+      time: "03:00"
+      timezone: "America/New_York"
     groups:
-      all-dependencies:
+      dependencies:
         patterns:
           - "*"
