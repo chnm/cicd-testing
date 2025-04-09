@@ -12,7 +12,7 @@ updates:
     schedule:
       interval: "daily"
       day: "sunday"
-      time: "11:00"
+      time: "11:15"
       timezone: "America/New_York"
     target-branch: "main"
     reviewers:
