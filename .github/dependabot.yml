@@ -11,8 +11,8 @@ updates:
           - "*"
     schedule:
       interval: "daily"
-      day: "wednesday"
-      time: "17:35"
+      #day: "wednesday"
+      time: "15:05"
       timezone: "America/New_York"
     target-branch: "main"
     reviewers:
