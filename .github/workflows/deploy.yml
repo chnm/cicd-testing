@@ -22,11 +22,11 @@ jobs:
       container-image-name: "cicd-testing-website"
       hugo-context-root: "hugo"
       hugo-devl-url: "https://devl.rrchnm.site"
-      hugo-prod-url: "https://test1.rrchnm.org"
+      hugo-prod-url: "https://devl.rrchnm.site"
       
       build-artifact-name: "cicd-testing-website"
       release-tag-name-type: "semvar"
       
-      website-devl-fqdn: "dev.test1.rrchnm.org"
-      website-prod-fqdn: "test1.rrchnm.org"
+      website-devl-fqdn: "devl.rrchnm.site"
+      website-prod-fqdn: "devl.rrchnm.site"
       
