@@ -23,16 +23,12 @@ services:
     command: >
         sh -c "poetry run python3 manage.py migrate &&
                poetry run python3 manage.py runserver 0.0.0.0:8000"
-    {% if template.volumes is defined %}
-    {% set vols = (template.volumes | selectattr('service', 'eq', service)) %}
-    {% if vols is iterable and vols | length > 0 %}
+    {% if service.volumes is defined and (service.volumes is iterable and service.volumes | length > 0) %}
 
     volumes:
-    {% for vol in vols %}
-
-      - {{ vol.name }}:{{ vol.container_path }}
-    {% endfor %}
-    {% endif %}
+{% for vol in service.volumes %}
+    - {{ vol.host_path if vol.host_path is defined else vol.name }}:{{ vol.container_path }}
+{% endfor %}
     {% endif %}
 
     depends_on:
@@ -57,7 +53,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-
     {% if service.volumes is defined and (service.volumes is iterable and service.volumes | length > 0) %}
 
     volumes:
@@ -65,8 +60,6 @@ services:
     - {{ vol.host_path if vol.host_path is defined else vol.name }}:{{ vol.container_path }}
 {% endfor %}
     {% endif %}
-
-{% endfor %}
 
 volumes:
   {{ caddy_vols | indent(width=2, first=True ) }}
