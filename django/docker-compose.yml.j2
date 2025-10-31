@@ -7,7 +7,7 @@ services:
 
   {{ caddy_svc | indent(width=2, first=True ) }}
 
-  {% set service = 'app' %}
+  {% set service = (stack.services | selectattr('name', 'eq', 'app') | first) %}
 
   app:
     image: ghcr.io/{{ template.git.package.image_name }}:{{ template.git.package.tag }}
@@ -35,7 +35,7 @@ services:
       db:
         condition: service_healthy
 
-  {% set service = 'db' %}
+  {% set service = (stack.services | selectattr('name', 'eq', 'db') | first) %}
 
   db:
     image: {{ service.image if service.image is defined else "postgres:latest" }}
