@@ -1,37 +1,40 @@
-[tool.poetry]
-name = "rrchnm-cicd-django-test"
+[project]
+name = "cicd-testing"
 version = "0.1.0"
-description = "My RRCHNM Django Project: Lorem ipsum dolor sit amet"
-authors = ["Foo Bar <foo@bar.net>"]
-license = "MIT"
+description = "CI/CD Testing: testing django cicd"
+authors = ["RRCHNM <chnm@gmu.edu>"]
+license = "WTFPL"
 readme = "README.md"
-#requires-python = ">=3.12"
-packages = [{include = "django_test"}]
+requires-python = ">=3.13"
+packages = [{include = "cicd_testing"}]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-python-dotenv = "^1.0.1"
-daphne = "^4.1.2"
-whitenoise = "^6.8.2"
-django = "^5.1.4"
-django-environ = "^0.11.2"
-# allauth
-django-allauth = {version="^65.3.1", extras=["orcid", "slack", "github"]}
+dependencies = [
+  #"python >= 3.13",
+  "python-dotenv ~= 1.0.1",
+  "daphne ~= 4.2.1",
+  "whitenoise ~= 6.11.0",
+  "django ~= 5.2.7",
+  "django-environ ~= 0.12.0",
+  # allauth
+  "requests",
+  "django-allauth ~= 65.13.0",
+  
+  "django-tailwind ~= 4.3.1",
+  
+  # postgres
+  "psycopg2-binary ~= 2.9.11",
 
-django-tailwind = "^3.8.0"
+  # obj storage
+  "django-storages ~= 1.14.6",
+  "boto3 ~= 1.40.64",
+]
 
-# postgres
-psycopg2 = "^2.9.10"
-
-# obj storage
-django-storages = "^1.14.4"
-boto3 = "^1.35.94"
-
-[tool.poetry.group.dev.dependencies]
-black = "^24.10.0"
-djhtml = "^3.0.7"
-pre-commit = "^4.0.1"
-django-debug-toolbar = "^6.1.0"
-pytest-django = "^4.9.0"
-pylint-django = "^2.6.1"
-
+[dependency-groups]
+dev = [
+  "black ~= 24.10.0",
+  "djhtml ~= 3.0.7",
+  "pre-commit ~= 4.0.1",
+  "django-debug-toolbar >= 6.1.0",
+  "pytest-django ~= 4.11.1",
+  "pylint-django ~= 2.6.1",
+]

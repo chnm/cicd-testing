@@ -1,10 +1,10 @@
 ---
-name: rrchnm-cicd-django-test
+name: cicd-testing
 
 services:
   app:
     build: .
-    image: rrchnm/cicd-testing-django
+    image: "rrchnm/cicd-testing"
     ports:
       - 8000:8000
     volumes:
@@ -17,35 +17,42 @@ services:
       - DJANGO_CSRF_TRUSTED_ORIGINS=http://localhost
       - DB_HOST=db
       - DB_PORT=5432
-      - DB_NAME=rrchnm-cicd-django-test
-      - DB_USER=rrchnm-cicd-django-test
+      - DB_NAME=cicd-testing
+      - DB_USER=cicd-testing
       - DB_PASSWORD=password
+      - ALLAUTH_ORCID_CLIENT_ID=PLACEHOLDER
+      - ALLAUTH_ORCID_CLIENT_SECRET=PLACEHOLDER
       - ALLAUTH_GITHUB_CLIENT_ID=PLACEHOLDER
       - ALLAUTH_GITHUB_CLIENT_SECRET=PLACEHOLDER
       - ALLAUTH_SLACK_CLIENT_ID=PLACEHOLDER
       - ALLAUTH_SLACK_CLIENT_SECRET=PLACEHOLDER
       - OBJ_STORAGE=True
-      - OBJ_STORAGE_ACCESS_KEY_ID=TYD5LA84DHFQTMXT72ZD
-      - OBJ_STORAGE_SECRET_ACCESS_KEY=wpqxloq0k7Pl5ELF3AhqS+pB+orrd528XB+aO0uo
-      - OBJ_STORAGE_BUCKET_NAME=test1.rrchnm.org
+      - OBJ_STORAGE_ACCESS_KEY_ID=PLACEHOLDER
+      - OBJ_STORAGE_SECRET_ACCESS_KEY=PLACEHOLDER
+      - OBJ_STORAGE_BUCKET_NAME=PLACEHOLDER
       - OBJ_STORAGE_ENDPOINT_URL=https://dev.obj.rrchnm.org
     command: >
-        sh -c "poetry run python3 manage.py migrate &&
-               poetry run python3 manage.py runserver 0.0.0.0:8000"
+        sh -c "uv run python3 manage.py migrate --database=default --verbosity=2 &&
+               uv run python3 manage.py migrate cicd_testing --database=cicd_testing_db --verbosity=2 &&
+               uv run python3 manage.py migrate upload --database=upload_db --verbosity=2 &&
+               uv run python3 manage.py runserver 0.0.0.0:8000"
     depends_on:
       db:
         condition: service_healthy
   db:
-    image: postgres:17
+    image: postgres:18
+    ports:
+      - 5432:5432
     volumes:
-      - pg-data:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
+      - pg-data:/var/lib/postgresql
     environment:
-      - POSTGRES_DB=rrchnm-cicd-django-test
-      - POSTGRES_USER=rrchnm-cicd-django-test
+      - POSTGRES_DB=cicd-testing
+      - POSTGRES_USER=cicd-testing
       - POSTGRES_PASSWORD=password
       - POSTGRES_HOST=db
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U rrchnm-cicd-django-test"]
+      test: ["CMD-SHELL", "pg_isready -U cicd-testing"]
       interval: 2s
       timeout: 5s
       retries: 3

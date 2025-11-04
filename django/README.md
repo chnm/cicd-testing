@@ -1,3 +1,3 @@
-# My RRCHNM Django Project
+# CI/CD Testing
 
-Lorem ipsum dolor sit amet
+testing django cicd
