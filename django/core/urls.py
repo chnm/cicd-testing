@@ -5,13 +5,16 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from cicd_testing.views import index
-from upload.views import image_upload
+from .views import index as core_index
+from cicd_testing.views import index as cicd_testing_index
+from upload.views import upload_page
 
 urlpatterns = [
-    path('', index, name='index'),
+    path('', core_index, name='index'),
+    path('cicd_testing/', cicd_testing_index, name='cicd_testing'),
+    path('upload/', upload_page, name='upload'),
+
     path('admin/', admin.site.urls),
-    path('upload/', image_upload, name='upload'),
 
     # allauth
     path('accounts/', include('allauth.urls')),

@@ -4,7 +4,7 @@ from django.core.files.storage import FileSystemStorage
 
 from .models import Upload
 
-def image_upload(request):
+def upload_page(request):
   if request.method == 'POST':
     image_file = request.FILES['image_file']
     image_type = request.POST['image_type']

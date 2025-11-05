@@ -2,12 +2,12 @@ name: "django workflow"
 
 on:
   workflow_dispatch:
-# push:
-#   branches:
-#     - "**"
-#   paths:
-#     - ".github/workflows/django.yml"
-#     - "django/**"
+  push:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/django.yml"
+      - "django/**"
 
 concurrency:
   group: ${{ github.workflow }}
