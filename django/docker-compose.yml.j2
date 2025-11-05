@@ -61,6 +61,7 @@ services:
     - {{ vol.host_path if vol.host_path is defined else vol.name }}:{{ vol.container_path }}
 {% endfor %}
     {% endif %}
+
 volumes:
   {{ caddy_vols | indent(width=2, first=True ) }}
   {{ stack | get_all_named_volumes(project_name) | indent(width=2) }}
