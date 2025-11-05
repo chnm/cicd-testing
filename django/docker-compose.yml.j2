@@ -19,6 +19,7 @@ services:
       - {{ env.key }}={{ env.value }}
 {% endfor %}
     {% endif %}
+
     command: >
         sh -c "uv run python3 manage.py migrate --database=default --verbosity=1 &&
                uv run python3 manage.py migrate cicd_testing --database=cicd_testing_db --verbosity=1 &&
