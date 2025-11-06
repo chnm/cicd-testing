@@ -55,12 +55,12 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.slack',
     # tailwind
     'tailwind',
-    'theme',
+    'core.theme',
     # obj storage
     'storages',
 
     # local apps
-    'cicd_testing',
+    'test_app1',
     'upload',
 ]
 
@@ -86,7 +86,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [BASE_DIR / "core/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,10 +99,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'core.wsgi.application'
+WSGI_APPLICATION = "core.wsgi.application"
 ASGI_APPLICATION = "core.asgi.application"
 # Theme
-TAILWIND_APP_NAME = "theme"
+TAILWIND_APP_NAME = "core.theme"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

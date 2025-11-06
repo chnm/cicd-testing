@@ -6,12 +6,12 @@ from django.contrib import admin
 from django.urls import include, path
 
 from .views import index as core_index
-from cicd_testing.views import index as cicd_testing_index
+from test_app1.views import index as test_app1_index
 from upload.views import upload_page
 
 urlpatterns = [
     path('', core_index, name='index'),
-    path('cicd_testing/', cicd_testing_index, name='cicd_testing'),
+    path('test_app1/', test_app1_index, name='test_app1'),
     path('upload/', upload_page, name='upload'),
 
     path('admin/', admin.site.urls),

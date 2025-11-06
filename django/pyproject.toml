@@ -6,7 +6,7 @@ authors = ["RRCHNM <chnm@gmu.edu>"]
 license = "WTFPL"
 readme = "README.md"
 requires-python = ">=3.13"
-packages = [{include = "cicd_testing"}]
+packages = [{include = "test_app1"}]
 
 dependencies = [
   #"python >= 3.13",
