@@ -10,7 +10,7 @@ packages = [{include = "test_app1"}]
 
 dependencies = [
   #"python >= 3.13",
-  "python-dotenv ~= 1.0.1",
+  "python-dotenv ~= 1.2.1",
   "daphne ~= 4.2.1",
   "whitenoise ~= 6.11.0",
   "django ~= 5.2.7",
@@ -19,21 +19,21 @@ dependencies = [
   "requests",
   "django-allauth ~= 65.13.0",
   
-  "django-tailwind ~= 4.3.1",
+  "django-tailwind ~= 4.4.1",
   
   # postgres
   "psycopg2-binary ~= 2.9.11",
 
   # obj storage
   "django-storages ~= 1.14.6",
-  "boto3 ~= 1.40.64",
+  "boto3 ~= 1.41.0",
 ]
 
 [dependency-groups]
 dev = [
-  "black ~= 24.10.0",
+  "black ~= 25.11.0",
   "djhtml ~= 3.0.7",
-  "pre-commit ~= 4.0.1",
+  "pre-commit ~= 4.4.0",
   "django-debug-toolbar >= 6.1.0",
   "pytest-django ~= 4.11.1",
   "pylint-django ~= 2.6.1",
