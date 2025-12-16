@@ -66,4 +66,4 @@ services:
 
 volumes:
   {{ caddy_vols | indent(width=2, first=True ) }}
-  {{ stack | get_all_named_volumes(project_name) | indent(width=2) }}
+  {{ stack | get_all_named_volumes(compose_stack_name) | indent(width=2) }}
